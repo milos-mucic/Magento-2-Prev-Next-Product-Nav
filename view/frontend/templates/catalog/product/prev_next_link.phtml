@@ -1,0 +1,40 @@
+<?php
+/**
+ */
+
+use Magento\Framework\App\ObjectManager;
+
+/**
+ * @this \Younify\PreviousNextNavigation\Block\Catalog\Product\PrevNextLink
+ */
+?>
+<?php
+$_helper = $this->helper('Younify\PreviousNextNavigation\Helper\Data');
+$productCss = 'product-';
+
+if ($this->getIsNext() == 1) {
+    $productNext = "next";
+} else {
+    $productNext = "prev";
+}
+
+?>
+<?php if ($this->isProductExists()): ?>
+        <a class="prev-next-product <?php echo  $productCss . $productNext  ?>" href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->getTitle() ?>">
+            <?php echo $this->getIsNext() ? __('<div class="next-icon"></div>') : __('<div class="prev-icon"></div>'); ?>
+            <div class="prev-next-img">
+                <?php $objectmanager = ObjectManager::getInstance();
+                $product_id = $this->getProductId(); //Replace with your product ID
+                $productimages = [];
+                $product = $objectmanager->create('Magento\Catalog\Model\Product')->load($product_id);
+                $productimages = $product->getMediaGalleryImages();
+                foreach ($productimages as $productimage) {
+                    echo "<img src = " . $productimage['url'] . " max-height=150 max-width=150 />";
+                    break;
+                } ?>
+                <div class="prev-next-title">
+                    <?php echo $this->getTitle() ?>
+                </div>
+            </div>
+        </a>
+<?php endif; ?>

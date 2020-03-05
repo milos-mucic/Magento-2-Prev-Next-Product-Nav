@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content" >
+            <container name="prev.next.container" htmlTag="div" htmlClass="prev-next-container" before="product.info.review">
+                <block template="catalog/product/prev_next_link.phtml"
+                       class="Younify\PreviousNextNavigation\Block\Catalog\Product\PrevNextLink"
+                       name="product_prev_link" before="product.info.review">
+                    <arguments>
+                        <argument name="is_next" xsi:type="boolean">false</argument>
+                    </arguments>
+                </block>
+                <block template="catalog/product/prev_next_link.phtml"
+                       class="Younify\PreviousNextNavigation\Block\Catalog\Product\PrevNextLink"
+                       name="product_next_link" before="product.info.review">
+                    <arguments>
+                        <argument name="is_next" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>
